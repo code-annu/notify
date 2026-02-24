@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { JWTPayload, verifyAccessToken } from "../../util/jwt-util";
+import { JWTPayload, verifyAccessToken } from "../../util/jwt.util";
 import { UnauthorizedError } from "../../domain/error/errors";
 import { ErrorTypes } from "../../domain/error/ErrorType";
 
