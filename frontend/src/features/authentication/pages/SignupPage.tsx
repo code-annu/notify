@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { TextInputField } from "../../../components/input/TextInputField";
 import { PasswordInputField } from "../../../components/input/PasswordInputField";
 import { PrimaryButton } from "../../../components/button/PrimaryButton";
 import { AppRoutes } from "../../../router/router";
 import type { SignupRequestBody } from "../data/types";
-// import useAuth from "../hook/auth-hook";
+import useAuth from "../hook/auth-hook";
+import { toast } from "react-toastify";
 
 export const SignupPage: React.FC = () => {
-  // const { signupState, signup } = useAuth();
+  const { signupState, signup } = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<SignupRequestBody>({
     firstName: "",
     lastName: "",
@@ -26,9 +29,19 @@ export const SignupPage: React.FC = () => {
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Signup Data: ", formData);
-    // Handle signup logic
+    signup(formData);
   };
+
+  useEffect(() => {
+    if (signupState.error) {
+      toast.error(signupState.error.error.message);
+    }
+
+    if (signupState.success) {
+      toast.success("Signup successful");
+      navigate(AppRoutes.HOME);
+    }
+  }, [signupState]);
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -105,7 +118,12 @@ export const SignupPage: React.FC = () => {
             />
 
             <div>
-              <PrimaryButton type="submit" className="w-full">
+              <PrimaryButton
+                type="submit"
+                className="w-full"
+                isLoading={signupState.loading}
+                disabled={signupState.loading}
+              >
                 Sign up
               </PrimaryButton>
             </div>
