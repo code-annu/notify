@@ -3,16 +3,18 @@ import { App } from "../../domain/entity/app.entity";
 export default abstract class AppResponse {
   static toSingle(app: App, message: string, code: number) {
     return {
-      message,
+      status: "success",
       code,
+      message,
       data: this.filterData(app),
     };
   }
 
   static toList(apps: App[], message: string, code: number) {
     return {
-      message,
+      status: "success",
       code,
+      message,
       data: {
         apps: apps.map((app) => this.filterData(app)),
         total: apps.length,

@@ -50,11 +50,7 @@ export default class ProfileController {
   async deleteProfile(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       await this.deleteProfileUsecase.execute(req.auth!.userId);
-      return res.status(200).json({
-        status: "success",
-        code: 200,
-        message: "Profile deleted successfully",
-      });
+      return res.status(204).send();
     } catch (error) {
       next(error);
     }

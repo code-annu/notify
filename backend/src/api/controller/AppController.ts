@@ -105,11 +105,7 @@ export default class AppController {
         userId,
         appId: appId.toString(),
       });
-      res.status(200).json({
-        message: "App deleted successfully",
-        code: 200,
-        status: "success",
-      });
+      res.status(204).send();
     } catch (error) {
       next(error);
     }
