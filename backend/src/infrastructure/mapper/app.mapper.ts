@@ -2,16 +2,17 @@ import { App } from "../../domain/entity/app.entity";
 import { App as PrismaApp, User } from "../../generated/prisma";
 import UserMapper from "./user.mapper";
 
+type PrismaAppWithOwner = PrismaApp & { owner: User };
+
 export default abstract class AppMapper {
-  static toEntity(app: PrismaApp, owner: User): App {
-    const { id, name, description, created_at, active } = app;
+  static toEntity(app: PrismaAppWithOwner): App {
     return {
-      id: id,
-      owner: UserMapper.toEntity(owner),
-      name: name,
-      description: description,
-      active: active,
-      createdAt: created_at,
+      id: app.id,
+      owner: UserMapper.toEntity(app.owner),
+      name: app.name,
+      description: app.description,
+      active: app.active,
+      createdAt: app.created_at,
     };
   }
 }

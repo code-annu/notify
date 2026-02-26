@@ -20,7 +20,7 @@ export default class PrismaAppRepository implements IAppRepository {
       },
       include: { owner: true },
     });
-    return AppMapper.toEntity(app, app.owner);
+    return AppMapper.toEntity(app);
   }
 
   async update(id: string, updates: AppUpdate): Promise<App> {
@@ -33,7 +33,7 @@ export default class PrismaAppRepository implements IAppRepository {
       },
       include: { owner: true },
     });
-    return AppMapper.toEntity(app, app.owner);
+    return AppMapper.toEntity(app);
   }
 
   async delete(id: string): Promise<void> {
@@ -45,7 +45,7 @@ export default class PrismaAppRepository implements IAppRepository {
       where: { id },
       include: { owner: true },
     });
-    return app ? AppMapper.toEntity(app, app.owner) : null;
+    return app ? AppMapper.toEntity(app) : null;
   }
 
   async findByOwnerId(ownerId: string): Promise<App[]> {
@@ -53,7 +53,7 @@ export default class PrismaAppRepository implements IAppRepository {
       where: { owner_id: ownerId },
       include: { owner: true },
     });
-    return apps.map((app) => AppMapper.toEntity(app, app.owner));
+    return apps.map((app) => AppMapper.toEntity(app));
   }
 
   async deleteByOwnerId(ownerId: string): Promise<void> {
