@@ -2,6 +2,8 @@ import { config } from "dotenv";
 
 config();
 
+console.log("This ENV file is executed");
+
 const ENV = {
   PORT: process.env.PORT || 3000,
   JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET!,
@@ -12,6 +14,7 @@ const ENV = {
   DIRECT_URL: process.env.DIRECT_URL!,
   SUPABASE_PROJECT_URL: process.env.SUPABASE_PROJECT_URL!,
   SUPABASE_SECRET_KEY: process.env.SUPABASE_SECRET_KEY!,
+  ORIGIN_URL: process.env.ORIGIN_URL,
 };
 
 export default ENV;

@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password_hash String
+  first_name    String
+  last_name     String?
+  company_name  String
+  api_key       String?
+  is_deleted    Boolean   @default(false)
+  deleted_at    DateTime?
+  created_at    DateTime  @default(now())
+  sessions      Session[]
+  apps          App[]
+
+  @@map("users")
+}
+
+model Session {
+  id         String   @id @default(uuid())
+  user_id    String
+  token      String   @unique
+  expires_at DateTime
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id])
+
+  @@map("sessions")
+}
+
+model App {
+  id          String   @id @default(uuid())
+  owner_id    String
+  name        String
+  description String?
+  active      Boolean  @default(true)
+  created_at  DateTime @default(now())
+
+  owner       User         @relation(fields: [owner_id], references: [id])
+  appChannels AppChannel[]
+  appUsers    AppUser[]
+
+  @@map("apps")
+}
+
+model AppChannel {
+  id         String   @id @default(uuid())
+  app_id     String
+  ch_type    String
+  ch_name    String
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+
+  app App @relation(fields: [app_id], references: [id])
+
+  @@unique([app_id, ch_type])
+  @@map("app_channels")
+}
+
+model AppUser {
+  id           String   @id @default(uuid())
+  external_id  String
+  app_id       String
+  is_active    Boolean  @default(true)
+  email        String?
+  phone_number String?
+  created_at   DateTime @default(now())
+
+  app                            App                             @relation(fields: [app_id], references: [id])
+  appUserNotificationPreferences AppUserNotificationPreference[]
+
+  @@unique([app_id, external_id])
+  @@map("app_users")
+}
+
+model AppUserNotificationPreference {
+  id          String   @id @default(uuid())
+  app_user_id String
+  ch_type     String
+  allowed     Boolean  @default(true)
+  created_at  DateTime @default(now())
+
+  app_user AppUser @relation(fields: [app_user_id], references: [id])
+
+  @@unique([app_user_id, ch_type])
+  @@map("app_user_notification_preferences")
+}
