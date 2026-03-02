@@ -30,17 +30,11 @@ export const LoginPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (loginState.error) {
-      toast.error(loginState.error.error.message);
-    }
-  }, [loginState.error]);
-
-  useEffect(() => {
     if (loginState.success) {
       toast.success("Login successful");
       navigate(AppRoutes.HOME);
     }
-  }, [loginState.success]);
+  }, [loginState]);
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

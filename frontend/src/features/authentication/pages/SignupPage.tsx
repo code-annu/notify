@@ -33,10 +33,6 @@ export const SignupPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (signupState.error) {
-      toast.error(signupState.error.error.message);
-    }
-
     if (signupState.success) {
       toast.success("Signup successful");
       navigate(AppRoutes.HOME);
