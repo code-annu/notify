@@ -1,6 +1,20 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 import { StorageUtil } from "../util/StorageUtil";
 import ENV from "./env";
+import { AuthApi } from "../features/authentication/data/AuthApi";
+import { toast } from "react-toastify";
+
+// Custom axios request config
+interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+  _retry?: boolean;
+}
+
+// Variables for concurrency queue
+let isRefreshing = false;
+let failedQueue: Array<{
+  resolve: (value: string) => void;
+  reject: (reason: any) => void;
+}> = [];
 
 // Create an Axios instance
 export const axiosInstance = axios.create({
@@ -24,13 +38,10 @@ axiosInstance.interceptors.request.use(
   },
 );
 
-/*axiosInstance.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log(error);
     const originalRequest = error.config;
-
-    console.log("error response: ", error.response);
 
     if (
       error.response.status === 401 &&
@@ -40,17 +51,21 @@ axiosInstance.interceptors.request.use(
       originalRequest._retry = true;
       const token = StorageUtil.getRefreshToken();
       if (token) {
-        console.log("token from client: ", token);
         const data = await AuthApi.refreshToken(token);
-        StorageUtil.saveAccessToken(data.session.accessToken.token);
-        StorageUtil.saveRefreshToken(data.session.refreshToken.token);
-        console.log("data from client: ", data);
-        originalRequest.headers.Authorization = `Bearer ${data.session.accessToken}`;
+        StorageUtil.saveAccessToken(data.accessToken);
+        StorageUtil.saveRefreshToken(data.session.refreshToken);
+        originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
         return axiosInstance(originalRequest);
+      } else {
+        return Promise.reject(error);
       }
     }
+
+    const errorMessage = error.response.data.error.message;
+    toast.error(errorMessage);
+
     return Promise.reject(error);
   },
-);*/
+);
 
 export default axiosInstance;
