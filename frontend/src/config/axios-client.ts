@@ -1,20 +1,11 @@
-import axios, { type AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { StorageUtil } from "../util/StorageUtil";
 import ENV from "./env";
 import { AuthApi } from "../features/authentication/data/AuthApi";
 import { toast } from "react-toastify";
 
 // Custom axios request config
-interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-  _retry?: boolean;
-}
-
-// Variables for concurrency queue
-let isRefreshing = false;
-let failedQueue: Array<{
-  resolve: (value: string) => void;
-  reject: (reason: any) => void;
-}> = [];
+// Removed unused interfaces and vars.
 
 // Create an Axios instance
 export const axiosInstance = axios.create({

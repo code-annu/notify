@@ -5,6 +5,8 @@ import { HomePage } from "../features/home/HomePage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { DashboardLayout } from "../components/layouts/DashboardLayout";
 import { ProfilePage } from "../features/profile/pages/ProfilePage";
+import { AppsPage } from "../features/apps/pages/AppsPage";
+import { AppDetailsPage } from "../features/apps/pages/AppDetailsPage";
 
 export enum AppRoutes {
   LOGIN = "/login",
@@ -12,6 +14,7 @@ export enum AppRoutes {
   HOME = "/",
   PROFILE = "/profile",
   APPS = "/apps",
+  APP_DETAILS = "/apps/:id",
   NOTIFICATION = "/notification",
   HELP = "/help",
   SETTING = "/setting",
@@ -32,6 +35,8 @@ export const appRouter = createBrowserRouter([
         children: [
           { path: AppRoutes.HOME, Component: HomePage },
           { path: AppRoutes.PROFILE, Component: ProfilePage },
+          { path: AppRoutes.APPS, Component: AppsPage },
+          { path: AppRoutes.APP_DETAILS, Component: AppDetailsPage },
         ],
       },
     ],
