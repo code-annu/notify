@@ -3,11 +3,13 @@ import type {
   AuthResponse,
   AuthUser,
   LoginRequestBody,
-  SignupRequest,
+  SignupRequestBody,
 } from "./types";
 
 export abstract class AuthApi {
-  public static async signup(credentials: SignupRequest): Promise<AuthUser> {
+  public static async signup(
+    credentials: SignupRequestBody,
+  ): Promise<AuthUser> {
     const response = await postRequest<AuthResponse>(
       "/auth/signup",
       credentials,

@@ -1,4 +1,4 @@
-import type { NotifySingleResponse } from "../../../service/api/notify-response";
+import type { NotifyResponse } from "../../../service/api/notify-response";
 
 export interface AuthUser {
   user: {
@@ -15,7 +15,7 @@ export interface AuthUser {
   accessToken: string;
 }
 
-export interface AuthResponse extends NotifySingleResponse<AuthUser> {}
+export interface AuthResponse extends NotifyResponse<AuthUser> {}
 
 export interface SignupRequestBody {
   email: string;
