@@ -1,4 +1,4 @@
-import type { NotifySingleResponse } from "../../../service/api/notify-response";
+import type { NotifyResponse } from "../../../service/api/notify-response";
 
 export interface Profile {
   id: string;
@@ -6,10 +6,11 @@ export interface Profile {
   firstName: string;
   lastName: string | null;
   companyName: string;
+  apiKey: string | null;
   createdAt: Date;
 }
 
-export interface ProfileResponse extends NotifySingleResponse<Profile> {}
+export interface ProfileResponse extends NotifyResponse<Profile> {}
 
 export interface ProfileUpdateRequestBody {
   firstName?: string;
