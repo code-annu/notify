@@ -50,6 +50,29 @@ const appSlice = createSlice({
         error: null,
       };
     },
+    updateLocalApp: (state, action: PayloadAction<App>) => {
+      const app = action.payload;
+      if (state.myApps.data?.apps) {
+        const index = state.myApps.data.apps.findIndex((a) => a.id === app.id);
+        if (index !== -1) {
+          state.myApps.data.apps[index] = app;
+        }
+      }
+      if (state.selectedApp.data?.id === app.id) {
+        state.selectedApp.data = app;
+      }
+    },
+    removeLocalApp: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+      if (state.myApps.data?.apps) {
+        state.myApps.data.apps = state.myApps.data.apps.filter(
+          (a) => a.id !== id,
+        );
+      }
+      if (state.selectedApp.data?.id === id) {
+        state.selectedApp.data = null;
+      }
+    },
   },
   extraReducers: (builder) => {
     // getMyApps
@@ -88,5 +111,11 @@ const appSlice = createSlice({
   },
 });
 
-export const { resetMyApps, resetSelectedApp, addApp } = appSlice.actions;
+export const {
+  resetMyApps,
+  resetSelectedApp,
+  addApp,
+  updateLocalApp,
+  removeLocalApp,
+} = appSlice.actions;
 export default appSlice.reducer;
