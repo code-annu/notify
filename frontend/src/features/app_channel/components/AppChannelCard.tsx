@@ -4,6 +4,7 @@ import { ChannelType } from "../data/types";
 import { useAppDispatch } from "../../../app/app-hook";
 import { deleteAppChannel, getAppChannels } from "../state/app-channel-thunk";
 import { DangerButton } from "../../../components/button/DangerButton";
+import { toast } from "react-toastify";
 
 interface AppChannelCardProps {
   channel: AppChannel;
@@ -24,9 +25,10 @@ export const AppChannelCard: React.FC<AppChannelCardProps> = ({
       await dispatch(deleteAppChannel(channel.id)).unwrap();
       // Refetch channels to update the list after deletion
       dispatch(getAppChannels(appId));
+      toast.success("Channel deleted successfully");
     } catch (error) {
       console.error("Failed to delete channel", error);
-      // In a real app we'd trigger a toast notification here
+      toast.error("Failed to delete channel");
     } finally {
       setIsDeleting(false);
       setShowDeleteConfirm(false);

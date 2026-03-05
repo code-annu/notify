@@ -30,12 +30,12 @@ export abstract class AppChannelApi {
 
   static async getChannelById(channelId: string): Promise<AppChannel> {
     const response = await getRequest<AppChannelResponse>(
-      `/channels/${channelId}`,
+      `/app-channels/${channelId}`,
     );
     return response.data;
   }
 
   static async deleteAppChannel(channelId: string): Promise<void> {
-    await deleteRequest(`/channels/${channelId}`);
+    await deleteRequest(`/app-channels/${channelId}`);
   }
 }

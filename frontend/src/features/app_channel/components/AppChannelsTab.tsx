@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/app-hook";
 import { getAppChannels } from "../state/app-channel-thunk";
 import { CircularLoadingBar } from "../../../components/progress/CircularLoadingBar";
 import { PrimaryButton } from "../../../components/button/PrimaryButton";
 import type { AppChannel } from "../data/types";
 import { AppChannelCard } from "./AppChannelCard";
+import { CreateChannelForm } from "./CreateChannelForm";
 
 interface AppChannelsTabProps {
   appId: string;
@@ -13,6 +14,7 @@ interface AppChannelsTabProps {
 export const AppChannelsTab: React.FC<AppChannelsTabProps> = ({ appId }) => {
   const dispatch = useAppDispatch();
   const { appChannels } = useAppSelector((state) => state.appChannel);
+  const [showCreateForm, setShowCreateForm] = useState(false);
 
   useEffect(() => {
     // Fetch if data is empty OR if the loaded channels don't belong to this app
@@ -53,7 +55,7 @@ export const AppChannelsTab: React.FC<AppChannelsTabProps> = ({ appId }) => {
             Manage the communication channels for your application.
           </p>
         </div>
-        <PrimaryButton onClick={() => alert("Create channel flow (TBD)")}>
+        <PrimaryButton onClick={() => setShowCreateForm(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -98,9 +100,12 @@ export const AppChannelsTab: React.FC<AppChannelsTabProps> = ({ appId }) => {
           <h3 className="text-sm font-medium text-gray-900 mb-1">
             No channels configured
           </h3>
-          <p className="text-sm text-gray-500 max-w-sm">
+          <p className="text-sm text-gray-500 max-w-sm mb-6">
             You haven't added any notification channels to this application yet.
           </p>
+          <PrimaryButton onClick={() => setShowCreateForm(true)}>
+            Create Your First Channel
+          </PrimaryButton>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -108,6 +113,13 @@ export const AppChannelsTab: React.FC<AppChannelsTabProps> = ({ appId }) => {
             <AppChannelCard key={channel.id} channel={channel} appId={appId} />
           ))}
         </div>
+      )}
+
+      {showCreateForm && (
+        <CreateChannelForm
+          appId={appId}
+          onClose={() => setShowCreateForm(false)}
+        />
       )}
     </div>
   );

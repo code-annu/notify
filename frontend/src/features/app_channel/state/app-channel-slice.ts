@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { NotifyError } from "../../../util/error-handler-util";
+import type { NotifyError } from "../../../util/ErrorHandlerUtil";
 import type { AppChannel, AppChannelList } from "../data/types";
 
 import {

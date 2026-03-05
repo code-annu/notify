@@ -3,7 +3,7 @@ import { AppChannelApi } from "../data/AppChannelApi";
 import {
   mapToNotifyError,
   type NotifyError,
-} from "../../../util/error-handler-util";
+} from "../../../util/ErrorHandlerUtil";
 import type {
   AppChannel,
   AppChannelCreateRequestBody,

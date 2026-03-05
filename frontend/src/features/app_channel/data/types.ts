@@ -2,7 +2,7 @@ import type { NotifyResponse } from "../../../service/api/notify-response";
 
 // Enum
 export enum ChannelType {
-  SMS = "email",
+  SMS = "sms",
   EMAIL = "email",
   PUSH = "push",
 }
