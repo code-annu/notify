@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/app-hook";
 import { PrimaryButton } from "../../../components/button/PrimaryButton";
 import { AppComp } from "../components/AppComp";
 import { AppCreateForm } from "../components/AppCreateForm";
-import { getMyApps } from "../state/app-thunk";
+import { getMyAppsThunk } from "../state/app-thunk";
 import { CircularLoadingBar } from "../../../components/progress/CircularLoadingBar";
 
 export const AppsPage: React.FC = () => {
@@ -13,7 +13,7 @@ export const AppsPage: React.FC = () => {
 
   useEffect(() => {
     if (myApps.data) return;
-    dispatch(getMyApps());
+    dispatch(getMyAppsThunk());
   }, []);
 
   if (myApps.loading) return <CircularLoadingBar />;
@@ -66,7 +66,7 @@ export const AppsPage: React.FC = () => {
             {myApps.error.error?.message || "An unexpected error occurred."}
           </p>
           <button
-            onClick={() => dispatch(getMyApps())}
+            onClick={() => dispatch(getMyAppsThunk())}
             className="mt-3 text-sm font-medium text-red-700 hover:text-red-800 underline"
           >
             Try again

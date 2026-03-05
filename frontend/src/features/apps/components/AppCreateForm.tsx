@@ -1,41 +1,29 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../app/app-hook";
 import { PrimaryButton } from "../../../components/button/PrimaryButton";
 import { TextInputField } from "../../../components/input/TextInputField";
-import { createApp, getMyApps } from "../state/app-thunk";
+import useAppMutations from "../hooks/useAppMutations";
 
 interface AppCreateFormProps {
   onClose: () => void;
 }
 
 export const AppCreateForm: React.FC<AppCreateFormProps> = ({ onClose }) => {
-  const dispatch = useAppDispatch();
-  const { create } = useAppSelector((state) => state.app);
-
   const [newAppName, setNewAppName] = useState("");
   const [newAppDescription, setNewAppDescription] = useState("");
+  const { createApp, creatingApp, createAppError } = useAppMutations();
 
   const handleCreateApp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newAppName.trim()) return;
+    const created = await createApp({
+      name: newAppName,
+      description: newAppDescription,
+    });
 
-    try {
-      await dispatch(
-        createApp({
-          name: newAppName,
-          description: newAppDescription,
-        }),
-      ).unwrap();
-
-      // Reset form and close
+    if (created) {
       setNewAppName("");
       setNewAppDescription("");
       onClose();
-
-      // Refresh apps list
-      dispatch(getMyApps());
-    } catch (error) {
-      console.error("Failed to create app:", error);
     }
   };
 
@@ -54,20 +42,19 @@ export const AppCreateForm: React.FC<AppCreateFormProps> = ({ onClose }) => {
           value={newAppName}
           onChange={(e) => setNewAppName(e.target.value)}
           required
-          disabled={create.loading}
+          disabled={creatingApp}
         />
         <TextInputField
           label="Description (Optional)"
           placeholder="Briefly describe what this app is for..."
           value={newAppDescription}
           onChange={(e) => setNewAppDescription(e.target.value)}
-          disabled={create.loading}
+          disabled={creatingApp}
         />
 
-        {create.error && (
+        {createAppError && (
           <div className="text-sm text-red-600 bg-red-50 p-3 rounded-lg border border-red-100 mt-2">
-            {create.error.error?.message ||
-              "An error occurred while creating the app."}
+            {createAppError}
           </div>
         )}
 
@@ -76,14 +63,14 @@ export const AppCreateForm: React.FC<AppCreateFormProps> = ({ onClose }) => {
             type="button"
             onClick={onClose}
             className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
-            disabled={create.loading}
+            disabled={creatingApp}
           >
             Cancel
           </button>
           <PrimaryButton
             type="submit"
-            isLoading={create.loading}
-            disabled={!newAppName.trim() || create.loading}
+            isLoading={creatingApp}
+            disabled={!newAppName.trim() || creatingApp}
           >
             Create Application
           </PrimaryButton>

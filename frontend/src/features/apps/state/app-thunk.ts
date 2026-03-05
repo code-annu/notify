@@ -3,7 +3,7 @@ import { AppsApi } from "../data/AppsApi";
 import {
   mapToNotifyError,
   type NotifyError,
-} from "../../../util/error-handler-util";
+} from "../../../util/ErrorHandlerUtil";
 import type {
   App,
   AppCreateRequestBody,
@@ -11,7 +11,7 @@ import type {
   AppUpdateRequestBody,
 } from "../data/types";
 
-export const getMyApps = createAsyncThunk<
+export const getMyAppsThunk = createAsyncThunk<
   AppList,
   void,
   { rejectValue: NotifyError }
@@ -23,7 +23,7 @@ export const getMyApps = createAsyncThunk<
   }
 });
 
-export const getAppById = createAsyncThunk<
+export const getAppByIdThunk = createAsyncThunk<
   App,
   string,
   { rejectValue: NotifyError }
@@ -35,7 +35,7 @@ export const getAppById = createAsyncThunk<
   }
 });
 
-export const createApp = createAsyncThunk<
+export const createAppThunk = createAsyncThunk<
   App,
   AppCreateRequestBody,
   { rejectValue: NotifyError }
@@ -47,7 +47,7 @@ export const createApp = createAsyncThunk<
   }
 });
 
-export const updateApp = createAsyncThunk<
+export const updateAppThunk = createAsyncThunk<
   App,
   { id: string; data: AppUpdateRequestBody },
   { rejectValue: NotifyError }
@@ -59,7 +59,7 @@ export const updateApp = createAsyncThunk<
   }
 });
 
-export const deleteApp = createAsyncThunk<
+export const deleteAppThunk = createAsyncThunk<
   void,
   string,
   { rejectValue: NotifyError }

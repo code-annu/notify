@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/app-hook";
-import { getAppById } from "../state/app-thunk";
+import { getAppByIdThunk } from "../state/app-thunk";
 import { CircularLoadingBar } from "../../../components/progress/CircularLoadingBar";
 import { AppChannelsTab } from "../../app_channel/components/AppChannelsTab";
 import { AppSettingsPage } from "../../app_settings/AppSettingsPage";
@@ -20,7 +20,7 @@ export const AppDetailsPage: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(getAppById(id));
+      dispatch(getAppByIdThunk(id));
     }
   }, [id, dispatch]);
 
