@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/app-hook";
 import { getAppByIdThunk } from "../state/app-thunk";
 import { CircularLoadingBar } from "../../../components/progress/CircularLoadingBar";
 import { AppChannelsTab } from "../../app_channel/components/AppChannelsTab";
-import { AppUsersPage } from "../../app_settings/AppUsersPage";
+import { AppUsersTab } from "../../app_users/pages/AppUsersTab";
 import { AppSettingsTab } from "../components/AppSettingsTab";
 
 enum TabType {
@@ -106,7 +106,7 @@ export const AppDetailsPage: React.FC = () => {
 
         <div className="p-6 h-full min-h-[400px]">
           {activeTab === TabType.CHANNELS && <AppChannelsTab appId={app.id} />}
-          {activeTab === TabType.USERS && <AppUsersPage tab="USERS" />}
+          {activeTab === TabType.USERS && <AppUsersTab appId={app.id} />}
           {activeTab === TabType.SETTING && <AppSettingsTab />}
         </div>
       </div>
