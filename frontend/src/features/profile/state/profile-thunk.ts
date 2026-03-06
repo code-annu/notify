@@ -3,7 +3,7 @@ import { ProfileApi } from "../data/ProfileApi";
 import {
   mapToNotifyError,
   type NotifyError,
-} from "../../../util/error-handler-util";
+} from "../../../util/ErrorHandlerUtil";
 import type { Profile, ProfileUpdateRequestBody } from "../data/types";
 
 export const getProfile = createAsyncThunk<

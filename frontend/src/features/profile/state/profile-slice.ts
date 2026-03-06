@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { NotifyError } from "../../../util/error-handler-util";
+import type { NotifyError } from "../../../util/ErrorHandlerUtil";
 import type { Profile } from "../data/types";
 import { deleteProfile, getProfile, updateProfile } from "./profile-thunk";
 
