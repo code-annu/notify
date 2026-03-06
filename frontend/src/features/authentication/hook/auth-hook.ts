@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   mapToNotifyError,
   type NotifyError,
-} from "../../../util/error-handler-util";
+} from "../../../util/ErrorHandlerUtil";
 import type { LoginRequestBody, SignupRequestBody } from "../data/types";
 import { AuthApi } from "../data/AuthApi";
 import { StorageUtil } from "../../../util/StorageUtil";
