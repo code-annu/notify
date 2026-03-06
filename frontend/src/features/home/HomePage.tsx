@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/app-hook";
 import { AppRoutes } from "../../router/router";
 import { NavLink } from "react-router-dom";
-import { getMyApps } from "../apps/state/app-thunk";
+import { getMyAppsThunk } from "../apps/state/app-thunk";
 
 export const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -11,7 +11,7 @@ export const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (!myApps.data && !myApps.loading) {
-      dispatch(getMyApps());
+      dispatch(getMyAppsThunk());
     }
   }, [dispatch, myApps.data, myApps.loading]);
 
