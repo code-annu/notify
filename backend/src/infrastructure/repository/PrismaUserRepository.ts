@@ -60,4 +60,9 @@ export default class PrismaUserRepository implements IUserRepository {
     const user = await this.db.user.findUnique({ where: { email } });
     return user ? UserMapper.toEntity(user) : null;
   }
+
+  async findByApiKey(apiKey: string): Promise<User | null> {
+    const user = await this.db.user.findUnique({ where: { api_key: apiKey } });
+    return user ? UserMapper.toEntity(user) : null;
+  }
 }

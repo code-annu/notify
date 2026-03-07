@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../../domain/error/AppError";
 
-export const errorHandler = (
+export const handleError = (
   error: Error,
   _req: Request,
   res: Response,
