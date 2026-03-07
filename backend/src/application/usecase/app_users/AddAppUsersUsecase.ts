@@ -64,6 +64,7 @@ export default class AddAppUsersUsecase {
       }
       const createdAppUser = await this.appUserRepo.create({
         externalId: appUser.externalId,
+        fullname: appUser.fullname,
         appId,
         email: appUser.email || null,
         phoneNumber: appUser.phone || null,

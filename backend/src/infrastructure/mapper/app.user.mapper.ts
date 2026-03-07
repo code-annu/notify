@@ -14,6 +14,7 @@ export default abstract class AppUserMapper {
     return {
       id: appUser.id,
       externalId: appUser.external_id,
+      fullname: appUser.fullname,
       app: {
         id: appUser.app.id,
         ownerId: appUser.app.owner_id,

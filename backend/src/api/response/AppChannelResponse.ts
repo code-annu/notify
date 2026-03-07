@@ -9,12 +9,18 @@ export default abstract class AppChannelResponse {
       data: this.filterData(appChannel),
     };
   }
+
   static toList(appChannels: AppChannel[], message: string, code: number) {
     return {
       status: "success",
       code,
       message,
-      data: appChannels.map((appChannel) => this.filterData(appChannel)),
+      data: {
+        appChannels: appChannels.map((appChannel) =>
+          this.filterData(appChannel),
+        ),
+        total: appChannels.length,
+      },
     };
   }
 

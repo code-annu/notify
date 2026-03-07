@@ -39,12 +39,16 @@ const TYPES = {
   GetAppUsersUsecase: Symbol.for("GetAppUsersUsecase"),
   UpdateAppUserUsecase: Symbol.for("UpdateAppUserUsecase"),
 
+  // Notify Usecase
+  SendEmailNotificationUsecase: Symbol.for("SendEmailNotificationUsecase"),
+
   // Controller
   AuthController: Symbol.for("AuthController"),
   ProfileController: Symbol.for("ProfileController"),
   AppController: Symbol.for("AppController"),
   AppChannelController: Symbol.for("AppChannelController"),
   AppUserController: Symbol.for("AppUserController"),
+  NotifyController: Symbol.for("NotifyController"),
 };
 
 export default TYPES;

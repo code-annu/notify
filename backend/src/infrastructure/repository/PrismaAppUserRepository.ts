@@ -24,6 +24,7 @@ export default class PrismaAppUserRepository implements IAppUserRepository {
         app_id: appId,
         email,
         phone_number: phoneNumber,
+        fullname: data.fullname,
       },
       include: { app: true },
     });

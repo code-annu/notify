@@ -16,7 +16,7 @@ export default class UpdateAppUserUsecase {
   ) {}
 
   async execute(input: AppUserUpdateInput) {
-    const { userId, appUserId, email, phone } = input;
+    const { userId, appUserId, email, phone, fullname } = input;
 
     const user = await this.userRepo.findById(userId);
     if (!user || user.isDeleted) {
@@ -37,6 +37,7 @@ export default class UpdateAppUserUsecase {
       email: email || appUser.email,
       phoneNumber: phone || appUser.phoneNumber,
       isActive: appUser.isActive,
+      fullname: fullname || appUser.fullname,
     });
 
     return updatedUser;

@@ -35,7 +35,7 @@ export default abstract class AppResponse {
         firstName: owner.firstName,
         lastName: owner.lastName,
       },
-      created_at: app.createdAt,
+      createdAt: app.createdAt,
     };
   }
 }

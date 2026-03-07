@@ -28,6 +28,7 @@ export default abstract class AppUserResponse {
       externalId: appUser.externalId,
       email: appUser.email,
       phone: appUser.phoneNumber,
+      fullName: appUser.fullname,
       isActive: appUser.isActive,
       createdAt: appUser.createdAt,
       app: {

@@ -14,12 +14,14 @@ export interface AppUser {
   isActive: boolean;
   email: string | null;
   phoneNumber: string | null;
+  fullname: string;
   createdAt: Date;
 }
 
 export interface AppUserCreate {
   externalId: string;
   appId: string;
+  fullname: string;
   email: string | null;
   phoneNumber: string | null;
 }
@@ -27,5 +29,6 @@ export interface AppUserCreate {
 export interface AppUserUpdate {
   isActive: boolean;
   email: string | null;
+  fullname: string;
   phoneNumber: string | null;
 }

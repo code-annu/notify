@@ -7,7 +7,14 @@ export default abstract class ProfileResponse {
       status: "success",
       message,
       code,
-      data: { id, firstName, lastName, companyName, apiKey, createdAt },
+      data: {
+        id,
+        firstName,
+        lastName,
+        companyName,
+        apiKey,
+        createdAt,
+      },
     };
   }
 }

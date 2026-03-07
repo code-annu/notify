@@ -3,6 +3,7 @@ export interface AddAppUsersInput {
   appId: string;
   appUsers: {
     externalId: string;
+    fullname: string;
     email?: string;
     phone?: string;
   }[];
@@ -11,6 +12,7 @@ export interface AddAppUsersInput {
 export interface AppUserUpdateInput {
   userId: string;
   appUserId: string;
+  fullname?: string;
   email?: string;
   phone?: string;
 }

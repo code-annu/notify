@@ -33,6 +33,8 @@ import GetAppUsersUsecase from "../application/usecase/app_users/GetAppUsersUsec
 import GetAppUserUsecase from "../application/usecase/app_users/GetAppUserUsecase";
 import UpdateAppUserUsecase from "../application/usecase/app_users/UpdateAppUserUsecase";
 import AppUserController from "../api/controller/AppUserController";
+import SendEmailNotificationUsecase from "../application/usecase/notify/SendEmailNotificationUsecase";
+import NotifyController from "../api/controller/NotifyController";
 
 const container = new Container();
 
@@ -78,11 +80,17 @@ container.bind(TYPES.GetAppUserUsecase).to(GetAppUserUsecase);
 container.bind(TYPES.GetAppUsersUsecase).to(GetAppUsersUsecase);
 container.bind(TYPES.DeleteAppUsersUsecase).to(DeleteAppUsersUsecase);
 
+// Bind Notify usecase
+container
+  .bind(TYPES.SendEmailNotificationUsecase)
+  .to(SendEmailNotificationUsecase);
+
 // Bind controllers
 container.bind(TYPES.AuthController).to(AuthController);
 container.bind(TYPES.ProfileController).to(ProfileController);
 container.bind(TYPES.AppController).to(AppController);
 container.bind(TYPES.AppChannelController).to(AppChannelController);
 container.bind(TYPES.AppUserController).to(AppUserController);
+container.bind(TYPES.NotifyController).to(NotifyController);
 
 export default container;

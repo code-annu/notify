@@ -1,4 +1,4 @@
-import ENV from "../config/env";
+import ENV from "../config/constants";
 import jwt from "jsonwebtoken";
 import { StringValue } from "ms";
 

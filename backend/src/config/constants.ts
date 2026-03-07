@@ -14,7 +14,14 @@ const ENV = {
   DIRECT_URL: process.env.DIRECT_URL!,
   SUPABASE_PROJECT_URL: process.env.SUPABASE_PROJECT_URL!,
   SUPABASE_SECRET_KEY: process.env.SUPABASE_SECRET_KEY!,
-  ORIGIN_URL: process.env.ORIGIN_URL,
+  ORIGIN_URL: process.env.ORIGIN_URL!,
+  RABBIT_MQ_URL: process.env.RABBIT_MQ_URL!,
+};
+
+export const CONSTANTS = {
+  MAIN_EXCHANGE: "notifications",
+  DLX_EXCHANGE: "notifications_dead",
+  EMAIL_KEY: "email",
 };
 
 export default ENV;

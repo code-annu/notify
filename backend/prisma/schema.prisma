@@ -20,7 +20,7 @@ model User {
   first_name    String
   last_name     String?
   company_name  String
-  api_key       String?
+  api_key       String?   @unique
   is_deleted    Boolean   @default(false)
   deleted_at    DateTime?
   created_at    DateTime  @default(now())
@@ -78,6 +78,7 @@ model AppUser {
   is_active    Boolean  @default(true)
   email        String?
   phone_number String?
+  fullname     String
   created_at   DateTime @default(now())
 
   app                            App                             @relation(fields: [app_id], references: [id])
